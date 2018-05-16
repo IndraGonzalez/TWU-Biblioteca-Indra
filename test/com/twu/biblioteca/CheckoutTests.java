@@ -15,7 +15,7 @@ public class CheckoutTests {
     @Before
     public void initialize() {
         library = new LibraryManager();
-        TestHelper.giveOneCustomer(library);
+        userManager = TestHelper.giveOneCustomer(library);
     }
 
     @Test

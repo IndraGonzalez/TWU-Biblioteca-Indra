@@ -17,7 +17,7 @@ public class BookListTests {
     @Before
     public void initialize() {
         library = new LibraryManager();
-        TestHelper.giveOneCustomer(library);
+        userManager = TestHelper.giveOneCustomer(library);
     }
 
     @Test
