@@ -38,13 +38,13 @@ public class BookTests {
 
     @Test
     public void successfullFindBookByID() {
-        Book book = library.findBook(1);
+        Book book = (Book) library.findItem(1);
         assertEquals(book.getTitle().compareTo("Harry Potter"),0);
     }
 
     @Test
     public void unsuccessfullFindBookByID() {
-        Book book = library.findBook(22);
+        Book book = (Book) library.findItem(22);
         assertEquals(null,book);
     }
 

@@ -19,13 +19,13 @@ public class ReturnTests {
     public void successfulReturn() {
         OutputStream outputStream = TestHelper.prepareRedirectOutputForTests();
         TestHelper.givenLibraryHasOneBook(library);
-        library.getItems().get(0).setUnavailable();
+        library.getItems('b').get(0).setUnavailable();
         whenReturnBook(1);
         thenShowMessageSuccessfulReturn(outputStream);
     }
 
     private void thenShowMessageSuccessfulReturn(OutputStream outputStream) {
-        assertEquals(outputStream.toString().compareTo("Thank you for returning your book\n"),0);
+        assertEquals(outputStream.toString().compareTo("Thank you for returning your item\n"),0);
     }
 
     @Test
@@ -45,11 +45,11 @@ public class ReturnTests {
     }
 
     private void thenShowMessageUnsuccessfulReturn(OutputStream outputStream) {
-        assertEquals(outputStream.toString().compareTo("That is not a valid book to return\n"),0);
+        assertEquals(outputStream.toString().compareTo("That is not a valid item to return\n"),0);
     }
 
     private void whenReturnBook(int id) {
-        library.returnBook(id);
+        library.returnItem(id);
     }
 
     private void whenCheckoutBook(int id) {

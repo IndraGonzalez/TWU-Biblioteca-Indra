@@ -23,11 +23,11 @@ public class CheckoutTests {
     }
 
     private void thenShowMessageUnsuccessfulCheckoutLibraryEmpty(OutputStream outputStream) {
-        assertEquals(outputStream.toString().compareTo("The book is not available: The library is empty\n"),0);
+        assertEquals(outputStream.toString().compareTo("The item is not available: The library is empty\n"),0);
     }
 
     private void thenShowMessageUnsuccessfulCheckout(OutputStream outputStream) {
-        assertEquals(outputStream.toString().compareTo("The book is not available\n"),0);
+        assertEquals(outputStream.toString().compareTo("The item is not available\n"),0);
     }
 
     private void whenCheckoutBook(int id) {
@@ -44,7 +44,7 @@ public class CheckoutTests {
     }
 
     private void thenShowMessageSuccessfulCheckout(OutputStream outputStream) {
-        assertEquals(outputStream.toString().compareTo("Thank you! Enjoy your book\n"),0);
+        assertEquals(outputStream.toString().compareTo("Thank you! Enjoy your item\n"),0);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class CheckoutTests {
     public void unsuccesfulChechoutBookCanNotBeCheckout() {
         OutputStream outputStream = TestHelper.prepareRedirectOutputForTests();
         TestHelper.givenLibraryHasOneBook(library);
-        library.getItems().get(0).setUnavailable();
+        library.getItems('b').get(0).setUnavailable();
         whenCheckoutBook(1);
         thenShowMessageUnsuccessfulCheckout(outputStream);
     }

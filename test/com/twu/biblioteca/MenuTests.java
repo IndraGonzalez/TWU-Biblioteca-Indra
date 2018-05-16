@@ -35,7 +35,7 @@ public class MenuTests {
     public void listBooksWhenSelectListOption() {
         OutputStream outputStream = prepareRedirectOutputForTests();
 
-        String listInput = "list";
+        String listInput = "list books";
 
         TestHelper.givenLibraryHasThreeBook(library);
         givenInput(listInput);

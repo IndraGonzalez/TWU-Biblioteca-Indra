@@ -29,19 +29,19 @@ public abstract class CheckableItem {
     }
 
     public void checkout(){
-        if((this != null) && (this.isAvailable())) {
+        if(available) {
             this.setUnavailable();
-            System.out.println("Thank you! Enjoy your book");
+            System.out.println("Thank you! Enjoy your item");
         }
-        else System.out.println("The book is not available");
+        else System.out.println("The item is not available");
     }
 
     public void returnItem(){
-        if((this != null) && (!this.isAvailable())) {
+        if(!available) {
             this.setAvailable();
-            System.out.println("Thank you for returning your book");
+            System.out.println("Thank you for returning your item");
         }
-        else System.out.println("That is not a valid book to return");
+        else System.out.println("That is not a valid item to return");
     }
 
     public abstract String getPrint();

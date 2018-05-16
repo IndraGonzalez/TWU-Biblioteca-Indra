@@ -8,9 +8,9 @@ public class BibliotecaApp {
 
         Navigator navigator = new Navigator(library);
         navigator.showWelcomeMessage();
-        //navigator.showMenu();
+        navigator.showMenu();
 
-        library.checkoutItem(22);
+        //library.checkoutItem(22);
 
     }
 

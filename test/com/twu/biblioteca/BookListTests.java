@@ -58,7 +58,7 @@ public class BookListTests {
         OutputStream outputStream = prepareRedirectOutputForTests();
 
         TestHelper.givenLibraryHasThreeBook(library);
-        List<String> booksToShow = library.getAvailableBooksList();
+        List<String> booksToShow = library.getAvailableItemsList('b');
         assertEquals(booksToShow.size(),3);
     }
 
@@ -68,7 +68,7 @@ public class BookListTests {
 
         TestHelper.givenLibraryHasThreeBook(library);
         library.checkoutItem(1);
-        List<String> booksToShow = library.getAvailableBooksList();
+        List<String> booksToShow = library.getAvailableItemsList('b');
         assertEquals(booksToShow.size(),2);
     }
 

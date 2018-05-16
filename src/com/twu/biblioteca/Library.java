@@ -23,6 +23,7 @@ public class Library {
         return items;
     }
 
+    public CheckableItem findItem(int id) { return itemCollection.get(id); }
 
     public void listItems(char type) {
         ArrayList<CheckableItem> items = getItems(type);
@@ -47,15 +48,15 @@ public class Library {
     }
 
 
-    private List<String> getAvailableItemsList(char type) {
+    public List<String> getAvailableItemsList(char type) {
         List<String> itemsToPrint = new ArrayList<String>();
 
         Enumeration enumeration = itemCollection.elements();
         Object value;
         while( enumeration.hasMoreElements() ){
             value = enumeration.nextElement();
-            if(type == 'b' && value instanceof Book) itemsToPrint.add(((Book) value).getPrint());
-            if(type == 'm' && value instanceof Movie) itemsToPrint.add(((Movie) value).getPrint());
+            if(type == 'b' && value instanceof Book && ((Book) value).isAvailable()) itemsToPrint.add(((Book) value).getPrint());
+            if(type == 'm' && value instanceof Movie && ((Movie) value).isAvailable()) itemsToPrint.add(((Movie) value).getPrint());
         }
         return itemsToPrint;
     }
@@ -71,12 +72,14 @@ public class Library {
             return;
         }
         CheckableItem item = itemCollection.get(id);
-        item.checkout();
+        if(item != null) item.checkout();
+        else System.out.println("The item is not available");
     }
 
-    public void returnBook(int id) {
+    public void returnItem(int id) {
         CheckableItem item = itemCollection.get(id);
-        item.returnItem();
+        if(item != null) item.returnItem();
+        else System.out.println("That is not a valid item to return");
     }
 
 }
