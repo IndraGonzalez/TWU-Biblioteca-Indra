@@ -46,4 +46,8 @@ public class UserManager {
     public void showUserInfo() {
         currentUser.printInfo();
     }
+
+    public void logout() {
+        currentUser = null;
+    }
 }

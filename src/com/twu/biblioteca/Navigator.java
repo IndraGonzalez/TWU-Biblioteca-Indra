@@ -29,6 +29,7 @@ public class Navigator {
         System.out.println("-----------------------------------------");
         System.out.println("User info (write 'info')");
         if(userManager.userIsLibrarian()) System.out.println("List of checked books (write 'list')");
+        System.out.println("Log out (write 'out')");
         System.out.println("Quit (write 'quit')");
         System.out.println("****************************************");
         selectOption();
@@ -76,6 +77,10 @@ public class Navigator {
         }
         else if (option.compareTo("info") == 0) {
             userManager.showUserInfo();
+        }
+        else if (option.compareTo("out") == 0) {
+            userManager.logout();
+            loginMenu();
         }
         else System.out.println("Select valid option!");
     }
