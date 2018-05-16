@@ -10,11 +10,11 @@ import static org.testng.AssertJUnit.assertEquals;
 public class BookTests {
 
     private Book book;
-    private Library library;
+    private LibraryManager library;
 
     @Before
     public void initialize() {
-        library = new Library();
+        library = new LibraryManager();
         TestHelper.givenLibraryHasOneBook(library);
         book = new Book(1,"Harry Potter","JK Rowling", 1997);
     }

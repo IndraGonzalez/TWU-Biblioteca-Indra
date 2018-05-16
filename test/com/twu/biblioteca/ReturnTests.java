@@ -8,11 +8,14 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class ReturnTests {
 
-    private Library library;
+    private LibraryManager library;
+    private UserManager userManager;
+
 
     @Before
     public void initialize() {
-        library = new Library();
+        library = new LibraryManager();
+        TestHelper.giveOneCustomer(library);
     }
 
     @Test
@@ -53,7 +56,7 @@ public class ReturnTests {
     }
 
     private void whenCheckoutBook(int id) {
-        library.checkoutItem(id);
+        library.checkoutItem(id,userManager.getCurrentUser());
     }
 
 }

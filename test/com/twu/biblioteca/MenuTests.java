@@ -11,11 +11,12 @@ import static org.testng.Assert.assertTrue;
 public class MenuTests {
 
     private Navigator navigator;
-    private Library library;
+    private LibraryManager library;
+    private UserManager userManager;
 
     @Before
     public void initialize() {
-        library = new Library();
+        library = new LibraryManager();
     }
 
     @Test
@@ -43,19 +44,6 @@ public class MenuTests {
         thenShowListOfBooks(outputStream);
 
     }
-//
-//    @Test
-//    public void checkoutWhenSelectingOption() {
-//        OutputStream outputStream = prepareRedirectOutputForTests();
-//
-//        String checkout = "checkout";
-//
-//        TestHelper.givenLibraryHasThreeBook(library);
-//        givenInput(checkout);
-//        whenSelectingOption(checkout);
-//        thenAsksForId(outputStream);
-//
-//    }
 
     private void thenAsksForId(OutputStream outputStream) {
         assertEquals(outputStream.toString().compareTo("Please, write the reference number of the book:\n"),0);
@@ -72,8 +60,8 @@ public class MenuTests {
     }
 
     private void whenSelectingOption(String input) {
-        navigator = new Navigator(library);
-        navigator.getOption();
+        navigator = new Navigator(library,userManager);
+        navigator.getInputLine();
         navigator.processOptionCode(input);
     }
 

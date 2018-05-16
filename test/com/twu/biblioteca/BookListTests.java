@@ -10,11 +10,14 @@ import static org.testng.Assert.*;
 
 public class BookListTests {
 
-    private Library library;
+    private LibraryManager library;
+    private UserManager userManager;
+
 
     @Before
     public void initialize() {
-        library = new Library();
+        library = new LibraryManager();
+        TestHelper.giveOneCustomer(library);
     }
 
     @Test
@@ -67,7 +70,7 @@ public class BookListTests {
         OutputStream outputStream = prepareRedirectOutputForTests();
 
         TestHelper.givenLibraryHasThreeBook(library);
-        library.checkoutItem(1);
+        library.checkoutItem(1,userManager.getCurrentUser());
         List<String> booksToShow = library.getAvailableItemsList('b');
         assertEquals(booksToShow.size(),2);
     }

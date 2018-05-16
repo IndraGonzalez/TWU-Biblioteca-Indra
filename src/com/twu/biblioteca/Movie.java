@@ -13,6 +13,12 @@ public class Movie extends CheckableItem {
         this.rating = rating;
     }
 
+    public Movie(int id, String name, String director) {
+        super(id);
+        this.name = name;
+        this.director = director;
+    }
+
     public String getName() {
         return name;
     }
