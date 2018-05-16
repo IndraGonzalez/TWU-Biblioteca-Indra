@@ -3,8 +3,6 @@ package com.twu.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
 import java.io.*;
-import java.lang.reflect.AnnotatedType;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.twu.biblioteca.TestHelper.prepareRedirectOutputForTests;
@@ -60,7 +58,7 @@ public class BookListTests {
         OutputStream outputStream = prepareRedirectOutputForTests();
 
         TestHelper.givenLibraryHasThreeBook(library);
-        List<String> booksToShow = library.getBookList();
+        List<String> booksToShow = library.getAvailableBooksList();
         assertEquals(booksToShow.size(),3);
     }
 
@@ -69,8 +67,8 @@ public class BookListTests {
         OutputStream outputStream = prepareRedirectOutputForTests();
 
         TestHelper.givenLibraryHasThreeBook(library);
-        library.checkoutBook(1);
-        List<String> booksToShow = library.getBookList();
+        library.checkoutItem(1);
+        List<String> booksToShow = library.getAvailableBooksList();
         assertEquals(booksToShow.size(),2);
     }
 
@@ -87,19 +85,19 @@ public class BookListTests {
     }
 
     private void thenListHasThreeBooks() {
-        assertEquals(library.getBooks().size(),3);
+        assertEquals(library.getItems('b').size(),3);
     }
 
     private void thenListHasOneBook() {
-        assertEquals(library.getBooks().size(),1);
+        assertEquals(library.getItems('b').size(),1);
     }
 
     private void thenListIsEmpty() {
-        assertEquals(library.getBooks().size(),0);
+        assertEquals(library.getItems('b').size(),0);
     }
 
     private void whenListBooks() {
-        library.listBooks();
+        library.listItems('b');
     }
 
 

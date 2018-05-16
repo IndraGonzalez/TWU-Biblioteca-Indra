@@ -38,11 +38,11 @@ public class Navigator {
 
     public void processOptionCode(String option) {
         if (option.compareTo("quit") == 0) System.exit(0);
-        else if (option.compareTo("list") == 0) library.listBooks();
+        else if (option.compareTo("list") == 0) library.listItems();
         else if(option.compareTo("checkout") == 0){
             System.out.println("Please, write the reference number of the book:");
             int id = getNumber();
-            if(id != -1) library.checkoutBook(id);
+            if(id != -1) library.checkoutItem(id);
         }
         else if (option.compareTo("return") == 0){
             System.out.println("Please, write the reference number of the book:");

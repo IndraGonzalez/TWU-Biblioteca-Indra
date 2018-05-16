@@ -19,7 +19,7 @@ public class ReturnTests {
     public void successfulReturn() {
         OutputStream outputStream = TestHelper.prepareRedirectOutputForTests();
         TestHelper.givenLibraryHasOneBook(library);
-        library.getBooks().get(0).setUnavailable();
+        library.getItems().get(0).setUnavailable();
         whenReturnBook(1);
         thenShowMessageSuccessfulReturn(outputStream);
     }
@@ -53,7 +53,7 @@ public class ReturnTests {
     }
 
     private void whenCheckoutBook(int id) {
-        library.checkoutBook(id);
+        library.checkoutItem(id);
     }
 
 }

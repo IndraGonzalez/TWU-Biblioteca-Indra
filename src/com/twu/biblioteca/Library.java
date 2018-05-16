@@ -1,82 +1,82 @@
 package com.twu.biblioteca;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class Library {
 
-    private ArrayList<Book> books;
+    private Hashtable<Integer, CheckableItem> itemCollection;
 
     public Library() {
-        books = new ArrayList<Book>();
+        itemCollection = new Hashtable<Integer, CheckableItem>();
     }
 
-    public ArrayList<Book> getBooks() {
-        return books;
+    public ArrayList<CheckableItem> getItems(char type) {
+        ArrayList<CheckableItem> items = new ArrayList<>();
+
+        Enumeration enumeration = itemCollection.elements();
+        Object value;
+        while( enumeration.hasMoreElements() ){
+            value = enumeration.nextElement();
+            if(type == 'b' && value instanceof Book) items.add((CheckableItem) value);
+            if(type == 'm' && value instanceof Movie) items.add((CheckableItem) value);
+        }
+        return items;
     }
 
-    public void listBooks(){
-        if(books.size() == 0) {
+
+    public void listItems(char type) {
+        ArrayList<CheckableItem> items = getItems(type);
+
+        if (items.size() == 0) {
             System.out.println("The library is empty");
             return;
         }
-        System.out.println(" ---- BOOKS ----");
-        List<String> booksToShow = getBookList();
-        showBookList(booksToShow);
+
+        if (type == 'b') System.out.println(" ---- BOOKS ----");
+        if (type == 'm') System.out.println(" ---- MOVIES ----");
+
+        List<String> itemsToPrint = getAvailableItemsList(type);
+        printItemsList(itemsToPrint);
     }
 
-    public void showBookList(List<String> booksToShow) {
-        Iterator<String> booksIterator = booksToShow.iterator();
+    private void printItemsList(List<String> itemsToPrint) {
+        Iterator<String> booksIterator = itemsToPrint.iterator();
         while(booksIterator.hasNext()){
             System.out.println(booksIterator.next());
         }
     }
 
-    public List<String> getBookList() {
-        List<String> booksToShow = new ArrayList<String>();
 
-        Iterator<Book> booksIterator = books.iterator();
-        while(booksIterator.hasNext()){
-            Book book = booksIterator.next();
-            if(book.isAvailable()) booksToShow.add(book.getId() + "\t\t" + book.getTitle() + "\t\t" + book.getAuthor() + "\t\t" + book.getYear());
+    private List<String> getAvailableItemsList(char type) {
+        List<String> itemsToPrint = new ArrayList<String>();
+
+        Enumeration enumeration = itemCollection.elements();
+        Object value;
+        while( enumeration.hasMoreElements() ){
+            value = enumeration.nextElement();
+            if(type == 'b' && value instanceof Book) itemsToPrint.add(((Book) value).getPrint());
+            if(type == 'm' && value instanceof Movie) itemsToPrint.add(((Movie) value).getPrint());
         }
-        return booksToShow;
+        return itemsToPrint;
     }
 
-    public void addBook(Book book){
-        this.books.add(book);
+    public void addItem(CheckableItem item){
+        itemCollection.put(item.getId(),item);
     }
 
 
-    public void checkoutBook(int id) {
-        if(books.size() == 0) {
-            System.out.println("The book is not available: The library is empty");
+    public void checkoutItem(int id) {
+        if(itemCollection.size() == 0) {
+            System.out.println("The item is not available: The library is empty");
             return;
         }
-        Book book = findBook(id);
-        if((book != null) && (book.isAvailable())) {
-            book.setUnavailable();
-            System.out.println("Thank you! Enjoy your book");
-        }
-        else System.out.println("The book is not available");
+        CheckableItem item = itemCollection.get(id);
+        item.checkout();
     }
 
     public void returnBook(int id) {
-        Book book = findBook(id);
-        if((book != null) && (!book.isAvailable())) {
-            book.setAvailable();
-            System.out.println("Thank you for returning your book");
-        }
-        else System.out.println("That is not a valid book to return");
+        CheckableItem item = itemCollection.get(id);
+        item.returnItem();
     }
 
-    public Book findBook(int id) {
-        int index = 0;
-        while(index < books.size()){
-            if(books.get(index).getId() != id) index++;
-            else return books.get(index);
-        }
-        return null;
-    }
 }

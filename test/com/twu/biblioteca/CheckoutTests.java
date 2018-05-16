@@ -31,7 +31,7 @@ public class CheckoutTests {
     }
 
     private void whenCheckoutBook(int id) {
-        library.checkoutBook(id);
+        library.checkoutItem(id);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class CheckoutTests {
     public void unsuccesfulChechoutBookCanNotBeCheckout() {
         OutputStream outputStream = TestHelper.prepareRedirectOutputForTests();
         TestHelper.givenLibraryHasOneBook(library);
-        library.getBooks().get(0).setUnavailable();
+        library.getItems().get(0).setUnavailable();
         whenCheckoutBook(1);
         thenShowMessageUnsuccessfulCheckout(outputStream);
     }

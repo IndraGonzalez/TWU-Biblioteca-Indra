@@ -1,17 +1,16 @@
 package com.twu.biblioteca;
 
-public class Book {
+import java.util.ArrayList;
+import java.util.List;
 
-    private int id;
-    private boolean available = true;
+public class Book extends CheckableItem {
+
     private String title;
     private String author;
     private int year;
 
-
-
-    public Book(int id, String title, String author, int year){
-        this.id = id;
+    public Book(int id, String title, String author, int year) {
+        super(id);
         this.title = title;
         this.author = author;
         this.year = year;
@@ -29,21 +28,8 @@ public class Book {
         return year;
     }
 
-    public int getId() {
-        return id;
+    @Override
+    public String getPrint() {
+        return (this.getId() + "\t\t" + title + "\t\t" + author + "\t\t" + year);
     }
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void setUnavailable() {
-        this.available = false;
-    }
-
-    public void setAvailable() {
-        this.available = true;
-    }
-
-
 }
