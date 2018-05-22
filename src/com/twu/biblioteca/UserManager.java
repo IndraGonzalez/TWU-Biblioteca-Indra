@@ -4,30 +4,26 @@ import java.util.Hashtable;
 
 public class UserManager {
 
-    private User currentUser;
-    private Hashtable<String, User> userDatabase;
+    private static User currentUser;
+    private static Hashtable<String, User> userDatabase = new Hashtable<>();
 
-    public UserManager() {
-        userDatabase = new Hashtable<>();
-    }
-
-    public User getCurrentUser() {
+    public static User getCurrentUser() {
         return currentUser;
     }
 
-    public Hashtable<String, User> getUserDatabase() {
+    public static Hashtable<String, User> getUserDatabase() {
         return userDatabase;
     }
 
-    public void addUser(User user) {
+    public static void addUser(User user) {
         userDatabase.put(user.getId(),user);
     }
 
-    public boolean userIsLibrarian() {
+    public static boolean userIsLibrarian() {
         return currentUser.isLibrarian();
     }
 
-    public boolean login(String userCode, String userPass) {
+    public static boolean login(String userCode, String userPass) {
         User user = userDatabase.get(userCode);
         if(user != null){
             if(user.getPassword().compareTo(userPass) == 0){
@@ -43,11 +39,11 @@ public class UserManager {
         return false;
     }
 
-    public void showUserInfo() {
+    public static void showUserInfo() {
         currentUser.printInfo();
     }
 
-    public void logout() {
+    public static void logout() {
         currentUser = null;
     }
 }

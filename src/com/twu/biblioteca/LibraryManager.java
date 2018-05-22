@@ -4,13 +4,9 @@ import java.util.*;
 
 public class LibraryManager {
 
-    private Hashtable<Integer, CheckableItem> itemCollection;
+    private static Hashtable<Integer, CheckableItem> itemCollection = new Hashtable<Integer, CheckableItem>();
 
-    public LibraryManager() {
-        itemCollection = new Hashtable<Integer, CheckableItem>();
-    }
-
-    public ArrayList<CheckableItem> getItems(char type) {
+    public static ArrayList<CheckableItem> getItems(char type) {
         ArrayList<CheckableItem> items = new ArrayList<>();
 
         Enumeration enumeration = itemCollection.elements();
@@ -23,9 +19,9 @@ public class LibraryManager {
         return items;
     }
 
-    public CheckableItem findItem(int id) { return itemCollection.get(id); }
+    public static CheckableItem findItem(int id) { return itemCollection.get(id); }
 
-    public void listItems(char type) {
+    public static void listItems(char type) {
         ArrayList<CheckableItem> items = getItems(type);
 
         if (items.size() == 0) {
@@ -40,7 +36,7 @@ public class LibraryManager {
         printItemsList(itemsToPrint);
     }
 
-    private void printItemsList(List<String> itemsToPrint) {
+    private static void printItemsList(List<String> itemsToPrint) {
         Iterator<String> booksIterator = itemsToPrint.iterator();
         while(booksIterator.hasNext()){
             System.out.println(booksIterator.next());
@@ -48,7 +44,7 @@ public class LibraryManager {
     }
 
 
-    public List<String> getAvailableItemsList(char type) {
+    public static List<String> getAvailableItemsList(char type) {
         List<String> itemsToPrint = new ArrayList<String>();
 
         Enumeration enumeration = itemCollection.elements();
@@ -61,12 +57,12 @@ public class LibraryManager {
         return itemsToPrint;
     }
 
-    public void addItem(CheckableItem item){
+    public static void addItem(CheckableItem item){
         itemCollection.put(item.getId(),item);
     }
 
 
-    public void checkoutItem(int id, User user) {
+    public static void checkoutItem(int id, User user) {
         if(itemCollection.size() == 0) {
             System.out.println("The item is not available: The library is empty");
             return;
@@ -76,13 +72,13 @@ public class LibraryManager {
         else System.out.println("The item is not available");
     }
 
-    public void returnItem(int id) {
+    public static void returnItem(int id) {
         CheckableItem item = itemCollection.get(id);
         if(item != null) item.returnItem();
         else System.out.println("That is not a valid item to return");
     }
 
-    public void showLoansList() {
+    public static void showLoansList() {
         System.out.println(" --- LOANS --- ");
 
         Enumeration enumeration = itemCollection.elements();

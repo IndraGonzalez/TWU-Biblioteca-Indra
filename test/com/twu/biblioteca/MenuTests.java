@@ -10,7 +10,7 @@ import static org.testng.Assert.assertTrue;
 
 public class MenuTests {
 
-    private Navigator navigator;
+    /*private Navigator navigator;
     private LibraryManager library;
     private UserManager userManager;
 
@@ -60,9 +60,8 @@ public class MenuTests {
     }
 
     private void whenSelectingOption(String input) {
-        navigator = new Navigator(library,userManager);
-        navigator.getInputLine();
-        navigator.processOptionCode(input);
+        Navigator.getInputLine();
+        Navigator.processOptionCode(input);
     }
 
     private void givenInput(String input) {
@@ -76,6 +75,6 @@ public class MenuTests {
         PrintStream ps = new PrintStream(outputStream);
         System.setOut(ps);
         return outputStream;
-    }
+    }*/
 
 }
